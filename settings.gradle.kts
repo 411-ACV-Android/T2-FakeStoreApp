@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "FakeStoreApp"
 include(":app")
- 
+include(":app:lib")
