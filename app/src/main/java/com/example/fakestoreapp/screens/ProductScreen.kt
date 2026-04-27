@@ -23,7 +23,6 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.fakestoreapp.components.ProductItem
 import com.example.fakestoreapp.models.Product
-import com.example.fakestoreapp.models.productList
 import com.example.fakestoreapp.services.ProductService
 import com.example.fakestoreapp.ui.theme.FakeStoreAppTheme
 import kotlinx.coroutines.Dispatchers
@@ -81,7 +80,9 @@ fun ProductScreen(
 
     if (isLoading){
         Box(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(innerPadding),
             contentAlignment = Alignment.Center
         ){
             CircularProgressIndicator()
@@ -92,18 +93,19 @@ fun ProductScreen(
             columns = GridCells.Fixed(count = 2),
             modifier = Modifier
                 .fillMaxSize()
-                .padding()
-                .padding(all = 10.dp)
+                .padding(innerPadding),
+            contentPadding = PaddingValues(vertical = 8.dp)
         ) {
-            items(products){
-                    product -> ProductItem(product = product, onClick = {
+            items(products){ product ->
+                ProductItem(
+                    product = product,
+                    onClick = {
                         navController.navigate("products/${product.id}")
-            })
-
+                    }
+                )
             }
         }
     }
-
 }
 
 @Preview(
